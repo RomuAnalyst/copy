@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-  schedule:
-    - cron: '*/5 * * * *'
+  #schedule:
+    #- cron: '*/5 * * * *'
 
 permissions:
   contents: write  # Donne l'autorisation d'écrire dans le dépôt
