@@ -29,14 +29,14 @@ jobs:
 
       - name: Run R script
         run: |
-          Rscript script.R  # Assurez-vous que le script est à la racine du dépôt ou ajustez le chemin
+          Rscript fichier.qmd  # Assurez-vous que le script est à la racine du dépôt ou ajustez le chemin
 
       - name: Commit and Push CSV Update
         run: |
           git config --local user.email "you@example.com"  # Remplacez par votre adresse email
           git config --local user.name "Your Name"  # Remplacez par votre nom
-          git add results.csv  # Chemin vers votre fichier CSV (ajustez si nécessaire)
-          git commit -m "Update results.csv" || echo "No changes to commit"  # Commit les modifications
+          git add fichier.html  # Chemin vers votre fichier CSV (ajustez si nécessaire)
+          git commit -m "Update fichier.html" || echo "No changes to commit"  # Commit les modifications
           git push origin main  # Poussez les modifications sur la branche principale
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Utilisez le token GitHub pour l'authentification
