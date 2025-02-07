@@ -41,8 +41,8 @@ jobs:
         run: |
           git config --local user.email "you@example.com"  # Remplacez par votre adresse email
           git config --local user.name "Your Name"  # Remplacez par votre nom
-          git add script.html  # Chemin vers votre fichier CSV (ajustez si nécessaire)
-          git commit -m "Update script.html" || echo "No changes to commit"  # Commit les modifications
+          git add index.html  # Chemin vers votre fichier CSV (ajustez si nécessaire)
+          git commit -m "Update index.html" || echo "No changes to commit"  # Commit les modifications
           git push origin main  # Poussez les modifications sur la branche principale
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Utilisez le token GitHub pour l'authentification
