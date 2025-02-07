@@ -30,7 +30,7 @@ jobs:
 
       - name: Render QMD file
         run: |
-          R -e 'rmarkdown::render("fichier.qmd")'  # Remplacez par le chemin correct si nécessaire
+          R -e 'rmarkdown::render("script.qmd")'  # Remplacez par le chemin correct si nécessaire
 
       - name: Commit and Push CSV Update
         run: |
