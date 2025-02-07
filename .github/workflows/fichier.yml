@@ -28,6 +28,11 @@ jobs:
           R -e 'install.packages("dplyr")'
           R -e 'install.packages("rmarkdown")'  # Installez rmarkdown si nécessaire
 
+      - name: Install Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc
+
       - name: Render QMD file
         run: |
           R -e 'rmarkdown::render("script.qmd")'  # Remplacez par le chemin correct si nécessaire
@@ -36,8 +41,8 @@ jobs:
         run: |
           git config --local user.email "you@example.com"  # Remplacez par votre adresse email
           git config --local user.name "Your Name"  # Remplacez par votre nom
-          git add results.csv  # Chemin vers votre fichier CSV (ajustez si nécessaire)
-          git commit -m "Update results.csv" || echo "No changes to commit"  # Commit les modifications
+          git add script.html  # Chemin vers votre fichier CSV (ajustez si nécessaire)
+          git commit -m "Update script.html" || echo "No changes to commit"  # Commit les modifications
           git push origin main  # Poussez les modifications sur la branche principale
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Utilisez le token GitHub pour l'authentification
