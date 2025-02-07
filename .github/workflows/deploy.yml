@@ -33,7 +33,7 @@ jobs:
 
       - name: Render QMD file
         run: |
-          R -e 'rmarkdown::render("script.qmd")'
+          R -e 'rmarkdown::render("index.qmd")'
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
