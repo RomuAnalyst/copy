@@ -17,8 +17,6 @@ library(dplyr)
 # Créez un exemple de dataframe
 df <- data.frame(x = 1:10, y = rnorm(10))
 
-# Écrivez le dataframe dans un fichier CSV
-write.csv(df, "results.csv", row.names = FALSE)
 
 # Affichage du dataframe
 df
