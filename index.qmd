@@ -11,8 +11,13 @@ Ce document affiche le résultat d'un code R qui génère un dataframe et l'écr
 
 ## Exécution du Code R
 ```{r message = FALSE}
+# Installer ggplot2 si nécessaire
+if (!requireNamespace("ggplot2", quietly = TRUE)) {
+  install.packages("ggplot2")
+}
+# Charger les bibliothèques nécessaires
 library(dplyr)
-library(ggplot2) 
+library(ggplot2)
 # Créez un exemple de dataframe
 df <- data.frame(x = 1:10, y = rnorm(10))
 
