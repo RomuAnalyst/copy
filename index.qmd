@@ -11,7 +11,13 @@ Ce document affiche le résultat d'un code R qui génère un dataframe et l'écr
 
 ## Exécution du Code R
 ```{r message = FALSE}
+# Installer ggplot2 si nécessaire
+if (!requireNamespace("ggplot2", quietly = TRUE)) {
+  install.packages("ggplot2")
+}
+# Charger les bibliothèques nécessaires
 library(dplyr)
+library(ggplot2)
 # Créez un exemple de dataframe
 df <- data.frame(x = 1:10, y = rnorm(10))
 
@@ -21,4 +27,13 @@ df <- df %>%
 
 # Affichage du dataframe avec la nouvelle colonne
 df
+
+# Créer un graphique de dispersion de x et y
+ggplot(df, aes(x = x, y = y)) +
+  geom_point(color = "blue") +  # Ajoute des points bleus
+  geom_smooth(method = "lm", se = FALSE, color = "red") +  # Ajoute une ligne de tendance rouge
+  labs(title = "Graphique de dispersion avec ligne de tendance",
+       x = "Valeur de x",
+       y = "Valeur de y") +  # Ajoute des étiquettes de titre et des axes
+  theme_minimal()  # Applique un thème minimaliste
 ```
