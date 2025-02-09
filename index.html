@@ -351,7 +351,7 @@ display: none;
 
 <h1 class="title toc-ignore">Génération données aléatoires</h1>
 <h4 class="author">RomuAnalyst</h4>
-<h4 class="date">09/02/2025 10:48:51</h4>
+<h4 class="date">09/02/2025 14:52:12</h4>
 
 </div>
 
@@ -367,20 +367,23 @@ et l’écrit dans un fichier CSV.</p>
 # Créez un exemple de dataframe
 df &lt;- data.frame(x = 1:10, y = rnorm(10))
 
+# Ajoutez une troisième colonne z qui est le produit de x et y
+df &lt;- df %&gt;%
+  mutate(z = x * y)
 
-# Affichage du dataframe
+# Affichage du dataframe avec la nouvelle colonne
 df</code></pre>
-<pre><code>##     x           y
-## 1   1  1.39549766
-## 2   2  0.54134225
-## 3   3 -0.70234000
-## 4   4 -0.55898977
-## 5   5  0.13336638
-## 6   6 -0.81709907
-## 7   7 -2.26757193
-## 8   8  0.63407404
-## 9   9  0.34814340
-## 10 10  0.08119262</code></pre>
+<pre><code>##     x          y         z
+## 1   1 -1.2456077 -1.245608
+## 2   2 -0.8159361 -1.631872
+## 3   3 -0.9655415 -2.896624
+## 4   4 -2.0846211 -8.338484
+## 5   5 -1.3231465 -6.615732
+## 6   6  1.9785213 11.871128
+## 7   7 -0.4010817 -2.807572
+## 8   8  1.6569880 13.255904
+## 9   9 -0.3145416 -2.830874
+## 10 10  1.0246955 10.246955</code></pre>
 </div>
 
 
