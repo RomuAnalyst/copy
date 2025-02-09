@@ -1,6 +1,6 @@
 ---
-title: "Résultat du Code R"
-author: "Votre Nom"
+title: "Génération données aléatoires"
+author: "RomuAnalyst"
 date: "`r Sys.Date()`"
 format: html
 ---
