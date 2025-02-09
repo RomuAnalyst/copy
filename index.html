@@ -364,32 +364,25 @@ et l’écrit dans un fichier CSV.</p>
 </div>
 <div id="exécution-du-code-r" class="section level2">
 <h2>Exécution du Code R</h2>
-<pre class="r"><code>library(dplyr)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code># Créez un exemple de dataframe
+<pre class="r"><code>library(dplyr)
+
+# Créez un exemple de dataframe
 df &lt;- data.frame(x = 1:10, y = rnorm(10))
 
 
 # Affichage du dataframe
 df</code></pre>
-<pre><code>##     x           y
-## 1   1  1.94302184
-## 2   2  1.01922967
-## 3   3  0.23738950
-## 4   4 -0.13260227
-## 5   5  1.02943590
-## 6   6 -0.06129424
-## 7   7 -1.05844494
-## 8   8 -0.56774705
-## 9   9  0.19017425
-## 10 10  0.42984917</code></pre>
+<pre><code>##     x          y
+## 1   1 -0.8660371
+## 2   2 -2.1356060
+## 3   3  1.6494240
+## 4   4  0.1231834
+## 5   5 -1.9647944
+## 6   6 -0.2764780
+## 7   7  0.8044102
+## 8   8 -0.2275185
+## 9   9  1.2324628
+## 10 10 -1.6850215</code></pre>
 </div>
 
 
