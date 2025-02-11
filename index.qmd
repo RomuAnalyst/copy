@@ -1,39 +1,130 @@
 ---
-title: "Génération données aléatoires"
+
+title: "Génération de Données Aléatoires"
+
 author: "RomuAnalyst"
+
 date: "`r format(Sys.time(), '%d/%m/%Y %H:%M:%S')`"
-format: html
+
+format:
+
+  html:
+
+    theme: journal
+
+    toc: true
+
+    toc_float: true
+
+    number_sections: true
+
+    css: styles.css
+
+    include-before-body: header.html
+
 ---
+
+ 
 
 ## Introduction
 
-Ce document affiche le résultat d'un code R qui génère un dataframe et l'écrit dans un fichier CSV.
+ 
+
+Ce document présente un code R qui génère un jeu de données aléatoires, l'enregistre dans un fichier CSV et visualise les résultats avec des graphiques esthétiques.
+
+ 
 
 ## Exécution du Code R
-```{r message = FALSE}
-# Installer ggplot2 si nécessaire
-if (!requireNamespace("ggplot2", quietly = TRUE)) {
-  install.packages("ggplot2")
-}
+
+ 
+
+```{r setup, message=FALSE, warning=FALSE}
+
+# Installer les packages nécessaires si absent
+
+to_install <- c("ggplot2", "dplyr", "readr")
+
+new_packages <- to_install[!(to_install %in% installed.packages()[,"Package"])]
+
+if(length(new_packages)) install.packages(new_packages)
+
+ 
+
 # Charger les bibliothèques nécessaires
+
 library(dplyr)
+
 library(ggplot2)
-# Créez un exemple de dataframe
+
+library(readr)
+
+```
+
+ 
+
+### Génération du DataFrame
+
+ 
+
+```{r}
+
+# Création du dataframe df
+
 df <- data.frame(x = 1:10, y = rnorm(10))
 
-# Ajoutez une troisième colonne z qui est le produit de x et y
-df <- df %>%
-  mutate(z = x * y)
+ 
 
-# Affichage du dataframe avec la nouvelle colonne
+# Ajout d'une troisième colonne z comme produit de x et y
+
+df <- df %>% mutate(z = x * y)
+
+ 
+
+# Enregistrement dans un fichier CSV
+
+write_csv(df, "donnees_aleatoires.csv")
+
+ 
+
+# Affichage du dataframe
+
 df
 
-# Créer un graphique de dispersion de x et y
-ggplot(df, aes(x = x, y = y)) +
-  geom_point(color = "blue") +  # Ajoute des points bleus
-  geom_smooth(method = "lm", se = FALSE, color = "red") +  # Ajoute une ligne de tendance rouge
-  labs(title = "Graphique de dispersion avec ligne de tendance",
-       x = "Valeur de x",
-       y = "Valeur de y") +  # Ajoute des étiquettes de titre et des axes
-  theme_minimal()  # Applique un thème minimaliste
 ```
+
+ 
+
+### Visualisation des Données
+
+ 
+
+```{r fig.width=7, fig.height=5}
+
+# Graphique de dispersion avec personnalisation
+
+ggplot(df, aes(x = x, y = y)) +
+
+  geom_point(color = "#1f78b4", size = 3) +  # Points en bleu
+
+  geom_smooth(method = "lm", se = FALSE, color = "#e31a1c", linetype = "dashed") +  # Ligne de tendance rouge
+
+  labs(title = "Graphique de Dispersion avec Régression",
+
+       subtitle = "Analyse des relations entre x et y",
+
+       x = "Valeur de x",
+
+       y = "Valeur de y") +
+
+  theme_minimal(base_size = 14)  # Thème modernisé
+
+```
+
+ 
+
+## Conclusion
+
+ 
+
+Ce document illustre la génération et la visualisation de données aléatoires en R, avec une mise en forme améliorée et une meilleure expérience utilisateur.
+
