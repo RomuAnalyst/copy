@@ -2,7 +2,8 @@
 title: "Génération données aléatoires"
 author: "RomuAnalyst"
 date: "`r format(Sys.time(), '%d/%m/%Y %H:%M:%S')`"
-format: html
+format: 
+   html : cosmo
 ---
 
  
