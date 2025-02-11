@@ -6,21 +6,7 @@ author: "RomuAnalyst"
 
 date: "`r format(Sys.time(), '%d/%m/%Y %H:%M:%S')`"
 
-format:
-
-  html:
-
-    theme: journal
-
-    toc: true
-
-    toc_float: true
-
-    number_sections: true
-
-    css: styles.css
-
-    include-before-body: header.html
+format: html
 
 ---
 
