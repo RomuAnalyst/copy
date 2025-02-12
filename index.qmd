@@ -1,27 +1,20 @@
 ---
+
 title: "Génération données aléatoires"
 author: "RomuAnalyst"
 date: "`r format(Sys.time(), '%d/%m/%Y %H:%M:%S')`"
 format: html
 ---
 
-
-! [] (https://rtask.thinkr.fr/wp-content/uploads/migration-to-r4.2-in-ubuntu-22.04-header.png) 
-
+! [] ([https://rtask.thinkr.fr/wp-content/uploads/migration-to-r4.2-in-ubuntu-22.04-header.png](https://rtask.thinkr.fr/wp-content/uploads/migration-to-r4.2-in-ubuntu-22.04-header.png))
 
 ## Introduction
 
- 
-
 Ce document présente un code R qui génère un jeu de données aléatoires, l'enregistre dans un fichier CSV et visualise les résultats avec des graphiques esthétiques.
-
- 
 
 ## Exécution du Code R
 
- 
-
-```{r setup, message=FALSE, warning=FALSE}
+```{r}
 
 # Installer les packages nécessaires si absent
 
@@ -43,11 +36,7 @@ library(readr)
 
 ```
 
- 
-
 ### Génération du DataFrame
-
- 
 
 ```{r}
 
@@ -75,13 +64,9 @@ df
 
 ```
 
- 
-
 ### Visualisation des Données
 
- 
-
-```{r fig.width=7, fig.height=5}
+```{r}
 
 # Graphique de dispersion avec personnalisation
 
@@ -103,11 +88,6 @@ ggplot(df, aes(x = x, y = y)) +
 
 ```
 
- 
-
 ## Conclusion
 
- 
-
 Ce document illustre la génération et la visualisation de données aléatoires en R, avec une mise en forme améliorée et une meilleure expérience utilisateur.
-
