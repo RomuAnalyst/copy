@@ -1,95 +1,92 @@
 ---
-title: "Analyse des Boîtes de Match de Basketball"
-author: "Romuanalyst"
+
+## title: "Génération données aléatoires"
+author: "RomuAnalyst"
 date: "`r format(Sys.time(), '%d/%m/%Y %H:%M:%S')`"
 format: html
----
+
+! [] ([https://rtask.thinkr.fr/wp-content/uploads/migration-to-r4.2-in-ubuntu-22.04-header.png](https://rtask.thinkr.fr/wp-content/uploads/migration-to-r4.2-in-ubuntu-22.04-header.png))
 
 ## Introduction
 
-Ce document présente une analyse des boîtes de match de basketball en utilisant le package `rvest` pour le scraping de données.
+Ce document présente un code R qui génère un jeu de données aléatoires, l'enregistre dans un fichier CSV et visualise les résultats avec des graphiques esthétiques.
 
-```{r message = F}
+## Exécution du Code R
+
+```{r
+
 # Installer les packages nécessaires si absent
 
-to_install <- c("ggplot2", "dplyr", "readr", "rvest", "tidyverse", "gridExtra", "grid")
+to_install <- c("ggplot2", "dplyr", "readr")
 
 new_packages <- to_install[!(to_install %in% installed.packages()[,"Package"])]
 
 if(length(new_packages)) install.packages(new_packages)
 
+ 
 
-library(rvest)
-library(tidyverse)
-library(gridExtra) # Load gridExtra
-library(grid) # Load grid for textGrob
+# Charger les bibliothèques nécessaires
 
-url <- "https://www.basketball-reference.com/boxscores/"
+library(dplyr)
 
-# Scrape all tables from the webpage
-tables <- url %>%
-  read_html() %>%
-  html_table(fill = TRUE)
+library(ggplot2)
 
-# Create data frames dynamically
-list2env(
-  setNames(tables, paste0("df", seq_along(tables))),
-  envir = .GlobalEnv
-)
+library(readr)
 
-# Function to process each group of 3 tables
-process_tables <- function(df1, df2, df3) {
-  # Remove the 3rd column from df1 (if it exists)
-  if (ncol(df1) >= 3) {
-    df1 <- df1[, -3]
-  }
-  
-  # Remove the 1st column from df2 (if it exists)
-  if (ncol(df2) >= 1) {
-    df2 <- df2[, -1]
-  }
-  
-  # Combine df1 and df2 side by side
-  df_combined <- cbind(df1, df2)
-  
-  # Return a list containing the main table and the side table
-  return(list(main_table = df_combined, side_table = df3))
-}
-
-# Initialize a list to store the results
-results <- list()
-
-# Process the tables in groups of 3
-for (i in seq(1, length(tables), by = 3)) {
-  if (i + 2 <= length(tables)) { # Verify that there is a complete group of 3 tables
-    group_result <- process_tables(get(paste0("df", i)), 
-                                   get(paste0("df", i + 1)), 
-                                   get(paste0("df", i + 2)))
-    results[[paste0("équipe_", i %/% 3 + 1)]] <- group_result
-  }
-}
-
-# Function to display tables in boxes
-display_tables <- function(main_table, side_table, group_name) {
-  # Convert tables to grob objects
-  main_grob <- tableGrob(main_table, rows = NULL)
-  side_grob <- tableGrob(side_table, rows = NULL)
-  
-  # Add a title to the arrangement
-  title <- textGrob(paste("Match", group_name), 
-                    gp = gpar(fontsize = 16, fontface = "bold"))
-  
-  # Arrange the tables side by side with a title
-  grid.arrange(title, main_grob, side_grob, 
-               ncol = 2, 
-               layout_matrix = rbind(c(1, 1), c(2, 3)),
-               heights = c(0.1, 1)) # Adjust heights for title and tables
-}
-
-# Display the results for each group in boxes
-for (group_name in names(results)) {
-  display_tables(results[[group_name]]$main_table, 
-                 results[[group_name]]$side_table, 
-                 group_name)
-}
 ```
+
+### Génération du DataFrame
+
+```{r}
+
+# Création du dataframe df
+
+df <- tibble(x = 1:10, y = rnorm(10))
+
+ 
+
+# Ajout d'une troisième colonne z comme produit de x et y
+
+df <- df %>% mutate(z = x * y)
+
+ 
+
+# Enregistrement dans un fichier CSV
+
+write_csv(df, "donnees_aleatoires.csv")
+
+ 
+
+# Affichage du dataframe
+
+df
+
+```
+
+### Visualisation des Données
+
+```{r
+
+# Graphique de dispersion avec personnalisation
+
+ggplot(df, aes(x = x, y = y)) +
+
+  geom_point(color = "#1f78b4", size = 3) +  # Points en bleu
+
+  geom_smooth(method = "lm", se = FALSE, color = "#e31a1c", linetype = "dashed") +  # Ligne de tendance rouge
+
+  labs(title = "Graphique de Dispersion avec Régression",
+
+       subtitle = "Analyse des relations entre x et y",
+
+       x = "Valeur de x",
+
+       y = "Valeur de y") +
+
+  theme_minimal(base_size = 14)  # Thème modernisé
+
+```
+
+## Conclusion
+
+Ce document illustre la génération et la visualisation de données aléatoires en R, avec une mise en forme améliorée et une meilleure expérience utilisateur.
