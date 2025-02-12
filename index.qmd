@@ -14,7 +14,7 @@ Ce document présente un code R qui génère un jeu de données aléatoires, l'e
 
 ## Exécution du Code R
 
-```{r
+```{r}
 
 # Installer les packages nécessaires si absent
 
@@ -66,7 +66,7 @@ df
 
 ### Visualisation des Données
 
-```{r
+```{r}
 
 # Graphique de dispersion avec personnalisation
 
