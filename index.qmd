@@ -5,7 +5,7 @@ date: "`r format(Sys.time(), '%d/%m/%Y %H:%M:%S')`"
 format: html
 ---
 
-! [] ([https://rtask.thinkr.fr/wp-content/uploads/migration-to-r4.2-in-ubuntu-22.04-header.png]) 
+! [] (https://rtask.thinkr.fr/wp-content/uploads/migration-to-r4.2-in-ubuntu-22.04-header.png) 
 
 ## Introduction
 
@@ -37,7 +37,7 @@ library(readr)
 
 ### Génération du DataFrame
 
-```{r include = F}
+```{r}
 
 # Création du dataframe df
 
