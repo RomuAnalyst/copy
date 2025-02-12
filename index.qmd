@@ -5,7 +5,7 @@ date: "`r format(Sys.time(), '%d/%m/%Y %H:%M:%S')`"
 format: html
 ---
 
- 
+ ! [] (https://www.yongxi-stat.com/wp-content/uploads/2024/03/0305-R-studio%E4%BB%8B%E9%9D%A2%E4%BB%8B%E7%B4%B91.png) 
 
 ## Introduction
 
@@ -51,7 +51,7 @@ library(readr)
 
 # Création du dataframe df
 
-df <- data.frame(x = 1:10, y = rnorm(10))
+df <- tibble(x = 1:10, y = rnorm(10))
 
  
 
