@@ -10,6 +10,15 @@ format: html
 Ce document présente une analyse des boîtes de match de basketball en utilisant le package `rvest` pour le scraping de données.
 
 ```{r message = F}
+# Installer les packages nécessaires si absent
+
+to_install <- c("ggplot2", "dplyr", "readr", "rvest", "tidyverse", "gridExtra", "grid")
+
+new_packages <- to_install[!(to_install %in% installed.packages()[,"Package"])]
+
+if(length(new_packages)) install.packages(new_packages)
+
+
 library(rvest)
 library(tidyverse)
 library(gridExtra) # Load gridExtra
