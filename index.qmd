@@ -6,7 +6,7 @@ format: html
 ---
 
 
-! [Données] (https://rtask.thinkr.fr/wp-content/uploads/migration-to-r4.2-in-ubuntu-22.04-header.png) 
+! [] (https://rtask.thinkr.fr/wp-content/uploads/migration-to-r4.2-in-ubuntu-22.04-header.png) 
 
 
 ## Introduction
