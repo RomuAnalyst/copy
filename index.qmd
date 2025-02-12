@@ -6,7 +6,7 @@ format: html
 ---
 
 
- ! [] (https://www.yongxi-stat.com/wp-content/uploads/2024/03/0305-R-studio%E4%BB%8B%E9%9D%A2%E4%BB%8B%E7%B4%B91.png) 
+ ! [] (https://rtask.thinkr.fr/wp-content/uploads/migration-to-r4.2-in-ubuntu-22.04-header.png) 
 
 
 ## Introduction
