@@ -1,17 +1,14 @@
-name: R Script Runner
+name: Run R Script
 
 on:
   push:
     branches:
-      - main
-  #schedule:
-  # - cron: '*/5 * * * *'
-
-permissions:
-  contents: write  # Donne l'autorisation d'écrire dans le dépôt
+      - main  # Changez 'main' par le nom de votre branche principale si nécessaire
+  schedule:
+    - cron: '0 0 * * *'  # Exécute le script tous les jours à minuit UTC
 
 jobs:
-  run-r-script:
+  run-script:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,32 +17,11 @@ jobs:
 
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
-        with:
-          R-version: '4.1'
 
       - name: Install dependencies
         run: |
-          R -e 'install.packages("dplyr")'
-          R -e 'install.packages("rmarkdown")'  # Installez rmarkdown si nécessaire
-          R -e 'install.packages("V8")'
-          R -e 'install.packages("juicyjuice")' 
-          R -e 'install.packages("gt")' 
+          R -e "install.packages(c('rvest', 'tidyverse', 'curl', 'httr', 'janitor', 'lubridate'))"
 
-      - name: Install Pandoc
+      - name: Run R script
         run: |
-          sudo apt-get update
-          sudo apt-get install -y pandoc
-
-      - name: Render QMD file
-        run: |
-          R -e 'rmarkdown::render("index.qmd")'  # Remplacez par le chemin correct si nécessaire
-
-      - name: Commit and Push CSV Update
-        run: |
-          git config --local user.email "you@example.com"  # Remplacez par votre adresse email
-          git config --local user.name "Your Name"  # Remplacez par votre nom
-          git add index.html  # Chemin vers votre fichier CSV (ajustez si nécessaire)
-          git commit -m "Update index.html" || echo "No changes to commit"  # Commit les modifications
-          git push origin main  # Poussez les modifications sur la branche principale
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Utilisez le token GitHub pour l'authentification
+          Rscript Script.R
