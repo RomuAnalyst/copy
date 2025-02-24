@@ -43,12 +43,12 @@ flowchart LR
 
 ```{r}
 # Installer les packages nécessaires si absent
-to_install <- c("ggplot2", "dplyr", "readr", "gt")
+to_install <- c("ggplot2", "dplyr", "readr", "V8", "juicyjuice", "gt") 
 new_packages <- to_install[!(to_install %in% installed.packages()[,"Package"])]
 if(length(new_packages)) install.packages(new_packages)
 
 # Charger les bibliothèques nécessaires
-lapply(c("ggplot2", "dplyr", "readr", "gt"), library, character.only = TRUE)
+lapply(c("ggplot2", "dplyr", "readr", "V8", "juicyjuice", "gt"), library, character.only = TRUE)
 ```
 
 ### Génération du DataFrame
