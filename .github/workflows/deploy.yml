@@ -25,11 +25,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          R -e 'install.packages("dplyr")'
-          R -e 'install.packages("rmarkdown")'
-          R -e 'install.packages("V8")'
-          R -e 'install.packages("juicyjuice")' 
-          R -e 'install.packages("gt")' 
+          R -e 'install.packages(c("dplyr", "rmarkdown", "V8", "juicyjuice", "gt"))'
           
       - name: Install Pandoc
         run: |
