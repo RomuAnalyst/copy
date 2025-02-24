@@ -1,66 +1,78 @@
+
 ---
 title: "Génération données aléatoires"
 author: "RomuAnalyst"
-date: "`r format(Sys.time(), '%d/%m/%Y %H:%M:%S')`"
+date: "Mise à jour : `r format(Sys.time(), '%d/%m/%Y %H:%M:%S')`"
 format: html
+abstract: "Ce document présente un code R qui génère un jeu de données aléatoires, l'enregistre dans un fichier CSV et visualise les résultats avec des graphiques esthétiques."
+abstract-title: "Résumé du site"
+theme: cosmo
+css: "./style.css"
+anchor-sections: true
+toc: true
+toc-depth: 2
+toc-location: "right"
+toc-title: "Table des matières"
+toc-expand: true
+lang: fr
+knitr:
+  opts_chunk: 
+    message: false
+    warning: false
 ---
 
 ![](https://rtask.thinkr.fr/wp-content/uploads/migration-to-r4.2-in-ubuntu-22.04-header.png)
 
-## Introduction
+<details>
+  <summary>Voir l'introduction</summary>
+Dans ce rapport, nous analysons l'évolution des prix des carburants en France au cours des dernières semaines, en nous concentrant particulièrement sur le carburant SP95. Les données utilisées sont mises à jour quotidiennement, offrant ainsi une vision précise et actualisée des fluctuations des prix à la pompe.  
+L’objectif principal de cette étude est de suivre l’évolution des prix du carburant, de détecter les tendances de court terme, et de mieux comprendre les facteurs qui influencent ces variations. Nous avons utilisé des données historiques sur les prix de carburants collectées sur une période récente, en observant l’évolution des prix à la fois quotidiennement et hebdomadairement. Cette analyse nous permettra de fournir des éléments concrets sur les dynamiques de marché actuelles et d'identifier les moments où les prix ont enregistré des variations notables.  
 
-Ce document présente un code R qui génère un jeu de données aléatoires, l'enregistre dans un fichier CSV et visualise les résultats avec des graphiques esthétiques.
+<center>_L'analyse est faite selon le shéma suivant :_</center>
+
+```{mermaid}
+flowchart LR
+  A[Base générale] --> B(Collecte des données du jour)
+  B --> C{Moyenne des prix du jour}
+  C --> D[Création du graphique]
+  C --> E[Création du tableau]
+```
+</details>
 
 ## Exécution du Code R
 
-```{r message = F}
-
+```{r}
 # Installer les packages nécessaires si absent
-
-to_install <- c("ggplot2", "dplyr", "readr")
-
+to_install <- c("ggplot2", "dplyr", "readr", "gt")
 new_packages <- to_install[!(to_install %in% installed.packages()[,"Package"])]
-
 if(length(new_packages)) install.packages(new_packages)
 
- 
-
 # Charger les bibliothèques nécessaires
-
-library(dplyr)
-
-library(ggplot2)
-
-library(readr)
-
+lapply(c("ggplot2", "dplyr", "readr", "gt"), library, character.only = TRUE)
 ```
 
 ### Génération du DataFrame
 
 ```{r}
-
 # Création du dataframe df
+df <- tibble(x = 1:10, y = rnorm(10)) %>% mutate(z = x * y) # Ajout d'une troisième colonne z comme produit de x et y
 
-df <- tibble(x = 1:10, y = rnorm(10))
-
- 
-
-# Ajout d'une troisième colonne z comme produit de x et y
-
-df <- df %>% mutate(z = x * y)
-
- 
+df$x <- formatC(df$x, format = "d", flag = "0")
+df$y <- round(df$y,2)
+df$z <- round(df$z,2)
+df_t <- as_tibble(t(df), rownames = "Variables")
 
 # Enregistrement dans un fichier CSV
-
 write_csv(df, "donnees_aleatoires.csv")
 
- 
-
-# Affichage du dataframe
-
-df
-
+# Affichage avec formatage des nombres
+gt(df_t) |>
+  gt::opt_stylize(style = 1, color = "cyan") |>
+  gt::cols_align(align = "center", columns = everything()) |>
+  gt::tab_style(
+    style = gt::cell_text(align = "center"),
+    locations = gt::cells_column_labels(everything())
+  )
 ```
 
 ### Analyse Descriptive
@@ -74,14 +86,16 @@ summary(df)
 
 ```{r fig.width=7, fig.height=5}
 # Graphique de dispersion avec personnalisation
-ggplot(df, aes(x = x, y = y)) +
+ggplot(df, aes(x = as.numeric(x), y = y)) +  # S'assurer que x est numérique
   geom_point(color = "#1f78b4", size = 3) +  # Points en bleu
-  geom_smooth(method = "lm", se = FALSE, color = "#e31a1c", linetype = "dashed") +  # Ligne de tendance rouge
+  geom_smooth(method = "lm", se = TRUE, color = "#e31a1c", linetype = "dashed") +  # Ligne de tendance rouge avec intervalle de confiance
   labs(title = "Graphique de Dispersion avec Régression",
        subtitle = "Analyse des relations entre x et y",
        x = "Valeur de x",
        y = "Valeur de y") +
+  scale_x_continuous(breaks = seq(min(as.numeric(df$x)-1), max(as.numeric(df$x)+1), by = 2)) +  # Afficher les valeurs de x tous les 2
   theme_minimal(base_size = 14)  # Thème modernisé
+
 ```
 
 ### Analyse Graphique
@@ -106,4 +120,3 @@ ggplot(df, aes(x = "", y = y)) +
 ## Conclusion
 
 Ce document illustre la génération, l'analyse descriptive et graphique de données aléatoires en R, avec une mise en forme améliorée et une meilleure expérience utilisateur.
-```
