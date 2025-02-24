@@ -27,6 +27,7 @@ jobs:
         run: |
           R -e 'install.packages("dplyr")'
           R -e 'install.packages("rmarkdown")'
+          R -e 'install.packages("gt")'
 
       - name: Install Pandoc
         run: |
