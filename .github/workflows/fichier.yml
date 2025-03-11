@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main  # Changez 'main' par le nom de votre branche principale si nécessaire
-  schedule:
-    - cron: '0 0 * * *'  # Exécute le script tous les jours à minuit UTC
+  #schedule:
+    #- cron: '0 0 * * *'  # Exécute le script tous les jours à minuit UTC
 
 jobs:
   run-script:
